@@ -27,7 +27,7 @@ function clacCol(rowIdx) {
     return rowHeight * rowIdx + rowHeight / 2
 }
 
-function drawText(text, x, y, size, fillColor, strokeColor) {
+function drawText(text, x, y, size, fillColor, strokeColor, selectedIdx) {
     gCtx.lineWidth = 1
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = fillColor
@@ -36,6 +36,13 @@ function drawText(text, x, y, size, fillColor, strokeColor) {
     gCtx.textBaseline = 'middle'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
+    if (selectedIdx === gMeme.selectedLineIdx) {
+        console.log('check')
+        const textWidth = text.length * size * 0.5
+        gCtx.strokeStyle = 'black'
+        gCtx.lineWidth = 2
+        gCtx.strokeRect(x - textWidth / 2 - 10, y - 2 - size / 2, textWidth + 20, size)
+    }
 }
 
 function drawImg(meme) {
@@ -48,12 +55,13 @@ function drawImg(meme) {
     elImg.onload = () => {
         console.log('on load')
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        meme.lines.forEach(line => {
-            const rowIdx = meme.selectedLineIdx
-            const colIdx = clacCol(rowIdx)
-            drawText(line.txt, gElCanvas.width / 2, colIdx, line.size, line.fillColor, line.strokeColor)
-        })
+        meme.lines.forEach((line, idx) => renderLine(line, idx))
     }
+}
+
+function renderLine(line, idx) {
+    const colIdx = clacCol(line.rowIdx)
+    drawText(line.txt, gElCanvas.width / 2, colIdx, line.size, line.fillColor, line.strokeColor, idx)
 }
 
 function onClearCanvas() {
@@ -103,4 +111,22 @@ function onIncreaseFont() {
 function onDecreaseFont() {
     updateFontSize(-2)
     renderMeme()
+}
+
+function onAddLine() {
+    addLine()
+    renderMeme()
+}
+
+function onSwitchLine() {
+    switchLine()
+    updateInputs()
+    renderMeme()
+}
+
+function updateInputs() {
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    document.querySelector('#text').value = currLine.txt
+    document.querySelector('#fillColor').value = currLine.fillColor
+    document.querySelector('#strokeColor').value = currLine.strokeColor
 }

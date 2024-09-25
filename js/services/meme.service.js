@@ -13,6 +13,7 @@ function getMeme() {
 }
 
 function setColors(fillColor, strokeColor) {
+    if (!gMeme) return
     setFillColor(fillColor)
     setStrokeColor(strokeColor)
 }
@@ -26,6 +27,7 @@ function setStrokeColor(strokeColor) {
 }
 
 function setLineTxt(txt) {
+    if (!gMeme) return
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
@@ -47,6 +49,7 @@ function createMeme(imgId) {
                 size: 40,
                 fillColor: 'white',
                 strokeColor: 'black',
+                rowIdx: 0,
             },
         ],
     }
@@ -55,4 +58,27 @@ function createMeme(imgId) {
 function updateFontSize(diff) {
     if (!gMeme) return
     gMeme.lines[gMeme.selectedLineIdx].size += diff
+}
+
+function addLine() {
+    // second line
+    if (!gMeme) return
+
+    console.log('gMeme:', gMeme)
+
+    const newLine = {
+        txt: 'Text',
+        size: 40,
+        fillColor: 'white',
+        strokeColor: 'black',
+        rowIdx: 4,
+    }
+    gMeme.lines.push(newLine)
+    gMeme.selectedLineIdx = 4
+}
+
+function switchLine() {
+    if (!gMeme || gMeme.lines.length === 0) return
+    gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
+    console.log('gMeme.selectedLineIdx :', gMeme.selectedLineIdx)
 }

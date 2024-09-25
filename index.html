@@ -28,7 +28,7 @@
                     <input required type="text" id="text" name="text" placeholder="Text" />
 
                     <p>Choose fill color:</p>
-                    <input type="color" id="fillColor" name="fillColor" value="#6d6c6c" />
+                    <input type="color" id="fillColor" name="fillColor" value="#ffffff" />
 
                     <p>Choose stroke color:</p>
                     <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
@@ -37,6 +37,9 @@
                         <button class="font-size-btn" onclick="onIncreaseFont()">A+</button>
                         <button class="font-size-btn" onclick="onDecreaseFont()">A-</button>
                     </div>
+
+                    <button class="add-line-btn" onclick="onAddLine()">➕</button>
+                    <button class="switch-line-btn" onclick="onSwitchLine()">🔃</button>
 
                     <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg"> Download as jpeg </a>
                 </section>
