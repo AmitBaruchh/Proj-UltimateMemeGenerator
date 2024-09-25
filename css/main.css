@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+.canvas-container {
+    background-color: #a1887f;
+    width: 80vw;
+    padding: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: white;
+    border: 1px solid black;
+}
+
+button {
+    margin-top: 1.5em;
+}
