@@ -26,3 +26,22 @@ canvas {
 button {
     margin-top: 1.5em;
 }
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.image-gallery {
+    width: 80%;
+    margin: 2em auto;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 10px;
+
+    padding: 60px;
+    margin: 0 auto;
+}

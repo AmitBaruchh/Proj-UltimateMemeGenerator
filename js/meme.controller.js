@@ -1,5 +1,7 @@
 'use strict'
 
+//^ Meme Controller
+
 var gElCanvas
 var gCtx
 
@@ -7,9 +9,10 @@ function onInit() {
     console.log('start')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    // resizeCanvas()
+    resizeCanvas()
     addListeners()
     renderMeme()
+    renderGallery()
 }
 
 function renderMeme() {
@@ -35,9 +38,13 @@ function drawText(text, x, y, size, fillColor, strokeColor) {
     gCtx.strokeText(text, x, y)
 }
 
-function drawImg(meme, src = 'img/1.jpg') {
+function drawImg(meme) {
+    if (!meme) return
     const elImg = new Image()
-    elImg.src = src
+
+    const imgObj = setImg(meme.selectedImgId)
+
+    elImg.src = imgObj.url
     elImg.onload = () => {
         console.log('on load')
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -53,10 +60,11 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-// function resizeCanvas() {
-//     const elContainer = document.querySelector('.canvas-container')
-//     gElCanvas.width = elContainer.clientWidth - 40 //Subtracting 20px padding from each side
-// }
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.clientWidth - 40 //Subtracting 20px padding from each side
+    renderMeme()
+}
 
 function onSetColor() {
     const fillColor = document.querySelector('#fillColor').value
@@ -73,9 +81,9 @@ function onSetText() {
 //* Handle the listeners
 function addListeners() {
     // Listen for resize ev
-    // window.addEventListener('resize', () => {
-    //     resizeCanvas()
-    // })
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+    })
     document.querySelector('#fillColor').addEventListener('input', onSetColor)
     document.querySelector('#strokeColor').addEventListener('input', onSetColor)
     document.querySelector('#text').addEventListener('input', onSetText)
