@@ -2,9 +2,6 @@
 
 var gElCanvas
 var gCtx
-var gFillColor = '#6d6c6c'
-var gStrokeColor = '#000000'
-var gTextInput = 'Text'
 
 function onInit() {
     console.log('start')
@@ -16,43 +13,39 @@ function onInit() {
 }
 
 function renderMeme() {
-    drawImg()
+    const meme = getMeme()
+    drawImg(meme)
 }
 
-function drawTextInRow(text, rowNumber) {
+function clacCol(rowIdx) {
     const totalRows = 5
     const rowHeight = gElCanvas.height / totalRows
 
-    const y = rowHeight * (rowNumber - 1) + rowHeight / 2
-
-    drawText(text, gElCanvas.width / 2, y)
+    return rowHeight * rowIdx + rowHeight / 2
 }
 
-// function onDraw(ev) {
-//     const offsetX = ev.offsetX
-//     const offsetY = ev.offsetY
-
-//     drawText(gTextInput, offsetX, offsetY)
-// }
-
-function drawText(text, x, y) {
+function drawText(text, x, y, size, fillColor, strokeColor) {
     gCtx.lineWidth = 1
-    gCtx.strokeStyle = gStrokeColor
-    gCtx.fillStyle = gFillColor
-    gCtx.font = '40px Arial'
+    gCtx.strokeStyle = strokeColor
+    gCtx.fillStyle = fillColor
+    gCtx.font = size + 'px Arial'
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
 }
 
-function drawImg(src = 'img/1.jpg') {
+function drawImg(meme, src = 'img/1.jpg') {
     const elImg = new Image()
     elImg.src = src
     elImg.onload = () => {
         console.log('on load')
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawTextInRow(gTextInput, 1)
+        meme.lines.forEach(line => {
+            const rowIdx = meme.selectedLineIdx
+            const colIdx = clacCol(rowIdx)
+            drawText(line.txt, gElCanvas.width / 2, colIdx, line.size, line.fillColor, line.strokeColor)
+        })
     }
 }
 
@@ -66,26 +59,24 @@ function onClearCanvas() {
 // }
 
 function onSetColor() {
-    gFillColor = document.querySelector('#fillColor').value
-    gStrokeColor = document.querySelector('#strokeColor').value
+    const fillColor = document.querySelector('#fillColor').value
+    const strokeColor = document.querySelector('#strokeColor').value
+    setColors(fillColor, strokeColor)
+    renderMeme()
 }
 
 function onSetText() {
-    gTextInput = document.querySelector('#text').value
+    setLineTxt(document.querySelector('#text').value)
+    renderMeme()
 }
 
 //* Handle the listeners
 function addListeners() {
-    addMouseListeners()
-    //* Listen for resize ev
+    // Listen for resize ev
     // window.addEventListener('resize', () => {
     //     resizeCanvas()
     // })
     document.querySelector('#fillColor').addEventListener('input', onSetColor)
     document.querySelector('#strokeColor').addEventListener('input', onSetColor)
     document.querySelector('#text').addEventListener('input', onSetText)
-}
-
-function addMouseListeners() {
-    // gElCanvas.addEventListener('click', onDraw)
 }
