@@ -47,8 +47,8 @@ function createMeme(imgId) {
             {
                 txt: 'Text',
                 size: 40,
-                fillColor: 'white',
-                strokeColor: 'black',
+                fillColor: '#ffffff',
+                strokeColor: '#000000',
                 rowIdx: 0,
             },
         ],
@@ -69,8 +69,8 @@ function addLine() {
     const newLine = {
         txt: 'Text',
         size: 40,
-        fillColor: 'white',
-        strokeColor: 'black',
+        fillColor: '#ffffff',
+        strokeColor: '#000000',
         rowIdx: 4,
     }
     gMeme.lines.push(newLine)

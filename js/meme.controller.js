@@ -127,6 +127,8 @@ function onSwitchLine() {
 function updateInputs() {
     const currLine = gMeme.lines[gMeme.selectedLineIdx]
     document.querySelector('#text').value = currLine.txt
+    console.log('currLine.fillColor:', currLine.fillColor)
+    
     document.querySelector('#fillColor').value = currLine.fillColor
     document.querySelector('#strokeColor').value = currLine.strokeColor
 }
