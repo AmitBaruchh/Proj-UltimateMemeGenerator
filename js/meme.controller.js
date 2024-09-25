@@ -88,3 +88,9 @@ function addListeners() {
     document.querySelector('#strokeColor').addEventListener('input', onSetColor)
     document.querySelector('#text').addEventListener('input', onSetText)
 }
+
+function downloadMeme(elLink) {
+    console.log(elLink)
+    var imgContent = gElCanvas.toDataURL()
+    elLink.href = imgContent
+}
