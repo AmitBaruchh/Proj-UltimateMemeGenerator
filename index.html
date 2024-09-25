@@ -12,27 +12,31 @@
             <h1>Ultimate Meme Generator</h1>
         </header>
         <main>
-            <section id="image-gallery">
+            <section class="image-gallery">
                 <h2>Image Gallery</h2>
             </section>
 
-            <section id="meme-editor">
+            <section class="meme-editor">
                 <h2>Meme Editor</h2>
                 <div class="canvas-container">
                     <canvas width="450" height="450"></canvas>
                 </div>
                 <button onclick="onClearCanvas()">Clear</button>
-
-                <section class="filter-color">
+                <section class="controller">
+                    <label for="text">Text:</label>
+                    <input required type="text" id="text" name="text" placeholder="Text" />
                     <p>Choose fill color:</p>
                     <input type="color" id="fillColor" name="fillColor" value="#6d6c6c" />
 
                     <p>Choose stroke color:</p>
                     <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
                 </section>
-            </section>
-        </main>
 
-        <script src="js/main.js"></script>
+              
+        </main>
+        <!-- <script src="js\services\storage.service.js"></script> -->
+        <!-- <script src="js\services\util.service.js"></script> -->
+        <!-- <script src="js\services\meme.service.js"></script> -->
+        <script src="js\meme.controller.js"></script>
     </body>
 </html>
