@@ -22,7 +22,7 @@
                 <div class="canvas-container">
                     <canvas width="450" height="450"></canvas>
                 </div>
-                <button onclick="onClearCanvas()">Clear</button>
+                <button class="clear-btn" onclick="onClearCanvas()">Clear</button>
                 <section class="controller">
                     <label for="text">Text:</label>
                     <input required type="text" id="text" name="text" placeholder="Text" />
@@ -32,6 +32,11 @@
 
                     <p>Choose stroke color:</p>
                     <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
+
+                    <div class="font-controls">
+                        <button class="font-size-btn" onclick="onIncreaseFont()">A+</button>
+                        <button class="font-size-btn" onclick="onDecreaseFont()">A-</button>
+                    </div>
 
                     <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg"> Download as jpeg </a>
                 </section>

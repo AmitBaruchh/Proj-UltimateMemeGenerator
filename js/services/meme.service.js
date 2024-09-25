@@ -52,3 +52,7 @@ function createMeme(imgId) {
     }
 }
 
+function updateFontSize(diff) {
+    if (!gMeme) return
+    gMeme.lines[gMeme.selectedLineIdx].size += diff
+}

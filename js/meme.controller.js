@@ -94,3 +94,13 @@ function downloadMeme(elLink) {
     var imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
 }
+
+function onIncreaseFont() {
+    updateFontSize(2)
+    renderMeme()
+}
+
+function onDecreaseFont() {
+    updateFontSize(-2)
+    renderMeme()
+}

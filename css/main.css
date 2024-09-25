@@ -24,10 +24,6 @@ canvas {
     border: 1px solid black;
 }
 
-button {
-    margin-top: 1.5em;
-}
-
 img {
     width: 100%;
     display: block;
@@ -45,22 +41,6 @@ img {
 
     padding: 60px;
     margin: 0 auto;
-}
-
-button {
-    margin-top: 1.5em;
-    padding: 0.6em 1.2em;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #388e3c;
 }
 
 .controller {
@@ -104,4 +84,33 @@ input[type='color'] {
 
 a:hover {
     background-color: #006494;
+}
+
+/* Buttons */
+
+button {
+    margin-top: 1.5em;
+    padding: 0.6em 1.2em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.clear-btn {
+    background-color: #4caf50;
+}
+
+.clear-btn:hover {
+    background-color: #388e3c;
+}
+
+.font-size-btn {
+    background-color: #b201df;
+}
+
+.font-size-btn:hover {
+    background-color: #9500ba;
 }
