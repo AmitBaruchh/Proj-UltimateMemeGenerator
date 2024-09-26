@@ -59,22 +59,24 @@ function drawText(idx) {
     gCtx.fillText(line.txt, x, y)
     gCtx.strokeText(line.txt, x, y)
 
-    const textWidth = line.txt.length * line.size * 0.5
+    if (idx === meme.selectedLineIdx) drawTextFrame(line)
+}
 
-    if (idx === meme.selectedLineIdx) {
-        gCtx.strokeStyle = '#ff6f00'
-        gCtx.lineWidth = 2
-        switch (line.align) {
-            case 'left':
-                gCtx.strokeRect(x - 5, y - line.size / 2, textWidth + 10, line.size)
-                break
-            case 'right':
-                gCtx.strokeRect(x - textWidth - 5, y - line.size / 2, textWidth + 10, line.size)
-                break
-            case 'center':
-                gCtx.strokeRect(x - textWidth / 2 - 10, y - line.size / 2, textWidth + 20, line.size)
-                break
-        }
+function drawTextFrame(line) {
+    const { x, y, width, height } = line.pos
+    gCtx.strokeStyle = '#ff6f00'
+    gCtx.lineWidth = 2
+
+    switch (line.align) {
+        case 'left':
+            gCtx.strokeRect(x - 5, y - height / 2, width + 10, height)
+            break
+        case 'right':
+            gCtx.strokeRect(x - width - 5, y - height / 2, width + 10, height)
+            break
+        case 'center':
+            gCtx.strokeRect(x - width / 2 - 10, y - height / 2, width + 20, height)
+            break
     }
 }
 
@@ -168,7 +170,10 @@ function onDecreaseFont() {
 }
 
 function onAddLine() {
-    addLine()
+    const line = addLine()
+    updateLinePos(line, gElCanvas.width / 2, clacCol(line.rowIdx), line.size)
+    const meme = getMeme()
+    updateSelectedLine(meme.lines.length - 1)
     renderMeme()
 }
 

@@ -83,7 +83,7 @@ function addLine() {
     if (!gMeme) return
 
     const newLine = {
-        txt: 'Text',
+        txt: ' ',
         size: 40,
         fillColor: '#ffffff',
         strokeColor: '#000000',
@@ -93,6 +93,7 @@ function addLine() {
     }
     gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = 4
+    return newLine
 }
 
 function switchLine() {
@@ -103,8 +104,8 @@ function switchLine() {
 function updateLinePos(line, x, y, size) {
     const textWidth = line.txt.length * size * 0.5
     line.pos = {
-        x: x - textWidth / 2,
-        y: y - size / 2,
+        x,
+        y,
         width: textWidth,
         height: size,
     }
