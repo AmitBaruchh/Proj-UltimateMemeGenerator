@@ -31,7 +31,7 @@
                     <button class="clear-btn" onclick="onClearCanvas()">Clear</button>
 
                     <label for="text">Text:</label>
-                    <input required type="text" id="text" name="text" placeholder="Text" />
+                    <input required type="text" id="text" name="text" placeholder="Text" onclick="clearInput(this)" />
 
                     <p>Choose fill color:</p>
                     <input type="color" id="fillColor" name="fillColor" value="#ffffff" />
@@ -40,7 +40,7 @@
                     <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
 
                     <label for="font-family">Font Family:</label>
-                    <select class="font-family"  onchange="onSetFontFamily(this.value)">
+                    <select class="font-family" onchange="onSetFontFamily(this.value)">
                         <option value="" disabled selected>Choose Font</option>
                         <option value="Impact">Impact</option>
                         <option value="Arial">Arial</option>
@@ -60,7 +60,10 @@
                     </div>
 
                     <button class="add-line-btn" onclick="onAddLine()">➕</button>
+                    <button class="delete-line-btn" onclick="onDeleteLine()">🗑️</button>
                     <button class="switch-line-btn" onclick="onSwitchLine()">🔃</button>
+                    <button onclick="onMoveLineUp()">⬆️</button>
+                    <button onclick="onMoveLineDown()">⬇️</button>
 
                     <a class="download-link" href="#" onclick="downloadMeme(this)" download="my-meme.jpg">
                         Download as jpeg

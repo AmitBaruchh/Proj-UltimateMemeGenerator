@@ -218,3 +218,23 @@ function onSetTextAlign(align) {
     setTextAlign(align)
     renderMeme()
 }
+
+function onDeleteLine() {
+    deleteLine()
+    renderMeme()
+}
+
+function clearInput(el) {
+    el.value = ''
+}
+
+function onMoveLineUp() {
+    updateRowIdx(-1)
+    renderMeme()
+}
+
+function onMoveLineDown() {
+    updateRowIdx(1)
+    renderMeme()
+}
+

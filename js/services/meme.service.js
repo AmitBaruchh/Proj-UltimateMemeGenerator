@@ -79,7 +79,16 @@ function updateFontSize(diff) {
 }
 
 function addLine() {
-    // second line
+    var numOfLines = gMeme.lines.length
+    var rowIdx
+    if (numOfLines == 0) {
+        rowIdx = 0
+    } else if (numOfLines === 1) {
+        rowIdx = 4
+    } else {
+        rowIdx = 2
+    }
+
     if (!gMeme) return
 
     const newLine = {
@@ -87,12 +96,12 @@ function addLine() {
         size: 40,
         fillColor: '#ffffff',
         strokeColor: '#000000',
-        rowIdx: 4,
+        rowIdx,
         font: 'Impact',
         align: 'center',
     }
     gMeme.lines.push(newLine)
-    gMeme.selectedLineIdx = 4
+    gMeme.selectedLineIdx = rowIdx
     return newLine
 }
 
@@ -121,4 +130,20 @@ function setFontFamily(fontFamily) {
 
 function setTextAlign(align) {
     gMeme.lines[gMeme.selectedLineIdx].align = align
+}
+
+function deleteLine() {
+    if (!gMeme.lines.length) return
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    if (gMeme.lines.length > 0) {
+        gMeme.selectedLineIdx = 0
+    }
+}
+
+function updateRowIdx(diff) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    const maxRows = 5
+    if (line.rowIdx + diff >= 0 && line.rowIdx + diff < maxRows) {
+        line.rowIdx += diff
+    }
 }
