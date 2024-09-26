@@ -28,6 +28,7 @@ function clacCol(rowIdx) {
 }
 
 function drawText(text, x, y, size, fillColor, strokeColor, selectedIdx) {
+    const meme = getMeme()
     gCtx.lineWidth = 1
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = fillColor
@@ -36,9 +37,10 @@ function drawText(text, x, y, size, fillColor, strokeColor, selectedIdx) {
     gCtx.textBaseline = 'middle'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
-    if (selectedIdx === gMeme.selectedLineIdx) {
-        console.log('check')
-        const textWidth = text.length * size * 0.5
+
+    const textWidth = text.length * size * 0.5
+
+    if (selectedIdx === meme.selectedLineIdx) {
         gCtx.strokeStyle = 'black'
         gCtx.lineWidth = 2
         gCtx.strokeRect(x - textWidth / 2 - 10, y - 2 - size / 2, textWidth + 20, size)
@@ -61,7 +63,10 @@ function drawImg(meme) {
 
 function renderLine(line, idx) {
     const colIdx = clacCol(line.rowIdx)
-    drawText(line.txt, gElCanvas.width / 2, colIdx, line.size, line.fillColor, line.strokeColor, idx)
+    const x = gElCanvas.width / 2
+    const y = colIdx
+    updateLinePos(line, x, y, line.size)
+    drawText(line.txt, x, y, line.size, line.fillColor, line.strokeColor, idx)
 }
 
 function onClearCanvas() {
@@ -88,6 +93,7 @@ function onSetText() {
 
 //* Handle the listeners
 function addListeners() {
+    addMouseListeners()
     // Listen for resize ev
     window.addEventListener('resize', () => {
         resizeCanvas()
@@ -95,6 +101,23 @@ function addListeners() {
     document.querySelector('#fillColor').addEventListener('input', onSetColor)
     document.querySelector('#strokeColor').addEventListener('input', onSetColor)
     document.querySelector('#text').addEventListener('input', onSetText)
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousedown', onDown)
+}
+
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    const meme = getMeme()
+
+    const clickedLineIdx = meme.lines.findIndex(line => isTextClick(pos.x, pos.y, line))
+    if (clickedLineIdx !== -1) {
+        updateSelectedLine(clickedLineIdx)
+        updateInputs()
+        renderMeme()
+    }
+    document.body.style.cursor = 'pointer'
 }
 
 function downloadMeme(elLink) {
@@ -125,10 +148,27 @@ function onSwitchLine() {
 }
 
 function updateInputs() {
-    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    const meme = getMeme()
+    const currLine = meme.lines[meme.selectedLineIdx]
     document.querySelector('#text').value = currLine.txt
-    console.log('currLine.fillColor:', currLine.fillColor)
-    
+
     document.querySelector('#fillColor').value = currLine.fillColor
     document.querySelector('#strokeColor').value = currLine.strokeColor
+}
+
+function isTextClick(clickX, clickY, line) {
+    return (
+        clickX >= line.pos.x &&
+        clickX <= line.pos.x + line.pos.width &&
+        clickY >= line.pos.y &&
+        clickY <= line.pos.y + line.pos.height
+    )
+}
+
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    return pos
 }

@@ -64,8 +64,6 @@ function addLine() {
     // second line
     if (!gMeme) return
 
-    console.log('gMeme:', gMeme)
-
     const newLine = {
         txt: 'Text',
         size: 40,
@@ -80,5 +78,18 @@ function addLine() {
 function switchLine() {
     if (!gMeme || gMeme.lines.length === 0) return
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
-    console.log('gMeme.selectedLineIdx :', gMeme.selectedLineIdx)
+}
+
+function updateLinePos(line, x, y, size) {
+    const textWidth = line.txt.length * size * 0.5
+    line.pos = {
+        x: x - textWidth / 2,
+        y: y - size / 2,
+        width: textWidth,
+        height: size,
+    }
+}
+
+function updateSelectedLine(clickedLineIdx) {
+    gMeme.selectedLineIdx = clickedLineIdx
 }
