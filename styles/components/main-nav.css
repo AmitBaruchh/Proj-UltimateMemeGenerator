@@ -1,0 +1,14 @@
+.main-nav ul {
+    display: flex;
+    gap: 10px;
+    color: white;
+}
+
+.main-nav a:hover {
+    text-decoration: underline;
+    color: var(--clr-secondary-2);
+}
+
+.hide {
+    display: none;
+}

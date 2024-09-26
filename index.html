@@ -3,20 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="styles/styles.css" />
 
         <title>Ultimate Meme Generator</title>
     </head>
-    <body onload="onInit()">
-        <header>
-            <h1 class="logo">memegen</h1>
-            <nav>
-                <a href="#" onclick="onShowGallery()">Gallery</a>
-                <a href="#">Memes</a>
-                <a href="#">About</a>
+    <body class="main-layout" onload="onInit()">
+        <header class="main-header">
+            <img src="logo/LOGO.png" alt="MemeGen Logo" />
+            <nav class="main-nav">
+                <ul>
+                    <li>
+                        <a href="#" onclick="onShowGallery()">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="#">Memes</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                </ul>
             </nav>
         </header>
-        <main>
+        <main class="main-content">
             <section class="image-gallery">
                 <h2>Image Gallery</h2>
                 <div class="gallery-container"></div>
@@ -49,18 +57,32 @@
                     </select>
 
                     <div class="text-align-controls">
-                        <button onclick="onSetTextAlign('left')">Left</button>
-                        <button onclick="onSetTextAlign('center')">Center</button>
-                        <button onclick="onSetTextAlign('right')">Right</button>
+                        <button onclick="onSetTextAlign('left')">
+                            <img src="icons\align-to-left.png" alt="Align Left" />
+                        </button>
+                        <button onclick="onSetTextAlign('center')">
+                            <img src="icons\center-text-alignment.png" alt="Align Center" />
+                        </button>
+                        <button onclick="onSetTextAlign('right')">
+                            <img src="icons\align-to-right.png" alt="Align Right" />
+                        </button>
                     </div>
 
                     <div class="font-size-controls">
-                        <button class="font-size-btn" onclick="onIncreaseFont()">A+</button>
-                        <button class="font-size-btn" onclick="onDecreaseFont()">A-</button>
+                        <button class="font-size-btn" onclick="onIncreaseFont()">
+                            <img src="icons\increase font - icon.png" alt="Increase Font Size" />
+                        </button>
+                        <button class="font-size-btn" onclick="onDecreaseFont()">
+                            <img src="icons\decrease font - icon.png" alt="Decrease Font Size" />
+                        </button>
                     </div>
 
-                    <button class="add-line-btn" onclick="onAddLine()">➕</button>
-                    <button class="delete-line-btn" onclick="onDeleteLine()">🗑️</button>
+                    <button class="add-line-btn" onclick="onAddLine()">
+                        <img src="icons\add.png" alt="Add Line" />
+                    </button>
+                    <button class="delete-line-btn" onclick="onDeleteLine()">
+                        <img src="icons\trash.png" alt="Delete Line" />
+                    </button>
                     <button class="switch-line-btn" onclick="onSwitchLine()">🔃</button>
                     <button onclick="onMoveLineUp()">⬆️</button>
                     <button onclick="onMoveLineDown()">⬇️</button>
@@ -71,7 +93,7 @@
                 </div>
             </section>
         </main>
-        <footer>
+        <footer class="main-footer">
             <p>Ultimate Meme Generator</p>
         </footer>
         <!-- <script src="js\services\storage.service.js"></script> -->

@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meme-editor {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .canvas-container,
+    .editor-controls {
+        max-width: 100%;
+    }
+}

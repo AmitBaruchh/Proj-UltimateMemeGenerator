@@ -1,0 +1,12 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--clr-primary-base);
+    color: var(--clr-secondary-2);
+}
+
+.main-header img {
+    max-width: 150px;
+}
