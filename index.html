@@ -9,7 +9,12 @@
     </head>
     <body onload="onInit()">
         <header>
-            <h1>Ultimate Meme Generator</h1>
+            <h1 class="logo">memegen</h1>
+            <nav>
+                <a href="#" onclick="onShowGallery()">Gallery</a>
+                <a href="#">Memes</a>
+                <a href="#">About</a>
+            </nav>
         </header>
         <main>
             <section class="image-gallery">
@@ -17,13 +22,14 @@
                 <div class="gallery-container"></div>
             </section>
 
-            <section class="meme-editor">
-                <h2>Meme Editor</h2>
+            <section class="meme-editor hide">
                 <div class="canvas-container">
                     <canvas width="450" height="450"></canvas>
                 </div>
-                <button class="clear-btn" onclick="onClearCanvas()">Clear</button>
-                <section class="controller">
+
+                <div class="editor-controls">
+                    <button class="clear-btn" onclick="onClearCanvas()">Clear</button>
+
                     <label for="text">Text:</label>
                     <input required type="text" id="text" name="text" placeholder="Text" />
 
@@ -41,10 +47,15 @@
                     <button class="add-line-btn" onclick="onAddLine()">➕</button>
                     <button class="switch-line-btn" onclick="onSwitchLine()">🔃</button>
 
-                    <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg"> Download as jpeg </a>
-                </section>
+                    <a class="download-link" href="#" onclick="downloadMeme(this)" download="my-meme.jpg">
+                        Download as jpeg
+                    </a>
+                </div>
             </section>
         </main>
+        <footer>
+            <p>Ultimate Meme Generator</p>
+        </footer>
         <!-- <script src="js\services\storage.service.js"></script> -->
         <!-- <script src="js\services\util.service.js"></script> -->
         <!-- <script src="js\services\gallery.service.js"></script> -->
