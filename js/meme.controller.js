@@ -29,23 +29,52 @@ function clacCol(rowIdx) {
     return rowHeight * rowIdx + rowHeight / 2
 }
 
-function drawText(text, x, y, size, fillColor, strokeColor, selectedIdx) {
+function drawText(idx) {
     const meme = getMeme()
+    const line = meme.lines[idx]
+
     gCtx.lineWidth = 1
-    gCtx.strokeStyle = strokeColor
-    gCtx.fillStyle = fillColor
-    gCtx.font = size + 'px Arial'
-    gCtx.textAlign = 'center'
+    gCtx.strokeStyle = line.strokeColor
+    gCtx.fillStyle = line.fillColor
+    gCtx.font = line.size + 'px ' + line.font
+
+    let x = 0
+    switch (line.align) {
+        case 'left':
+            x = 10
+            break
+        case 'right':
+            x = gElCanvas.width - 10
+            break
+        case 'center':
+            x = gElCanvas.width / 2
+            break
+    }
+
+    const y = clacCol(line.rowIdx)
+    updateLinePos(line, x, y, line.size)
+
+    gCtx.textAlign = line.align || 'center'
     gCtx.textBaseline = 'middle'
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
+    gCtx.fillText(line.txt, x, y)
+    gCtx.strokeText(line.txt, x, y)
 
-    const textWidth = text.length * size * 0.5
+    const textWidth = line.txt.length * line.size * 0.5
 
-    if (selectedIdx === meme.selectedLineIdx) {
-        gCtx.strokeStyle = 'black'
+    if (idx === meme.selectedLineIdx) {
+        gCtx.strokeStyle = '#ff6f00'
         gCtx.lineWidth = 2
-        gCtx.strokeRect(x - textWidth / 2 - 10, y - 2 - size / 2, textWidth + 20, size)
+        switch (line.align) {
+            case 'left':
+                gCtx.strokeRect(x - 5, y - line.size / 2, textWidth + 10, line.size)
+                break
+            case 'right':
+                gCtx.strokeRect(x - textWidth - 5, y - line.size / 2, textWidth + 10, line.size)
+                break
+            case 'center':
+                gCtx.strokeRect(x - textWidth / 2 - 10, y - line.size / 2, textWidth + 20, line.size)
+                break
+        }
     }
 }
 
@@ -68,7 +97,7 @@ function renderLine(line, idx) {
     const x = gElCanvas.width / 2
     const y = colIdx
     updateLinePos(line, x, y, line.size)
-    drawText(line.txt, x, y, line.size, line.fillColor, line.strokeColor, idx)
+    drawText(idx)
 }
 
 function onClearCanvas() {
@@ -173,4 +202,14 @@ function getEvPos(ev) {
         y: ev.offsetY,
     }
     return pos
+}
+
+function onSetFontFamily(fontFamily) {
+    setFontFamily(fontFamily)
+    renderMeme()
+}
+
+function onSetTextAlign(align) {
+    setTextAlign(align)
+    renderMeme()
 }

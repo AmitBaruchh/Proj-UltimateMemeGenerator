@@ -39,7 +39,22 @@
                     <p>Choose stroke color:</p>
                     <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
 
-                    <div class="font-controls">
+                    <label for="font-family">Font Family:</label>
+                    <select class="font-family"  onchange="onSetFontFamily(this.value)">
+                        <option value="" disabled selected>Choose Font</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Tahoma ">Comic Sans MS</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                    </select>
+
+                    <div class="text-align-controls">
+                        <button onclick="onSetTextAlign('left')">Left</button>
+                        <button onclick="onSetTextAlign('center')">Center</button>
+                        <button onclick="onSetTextAlign('right')">Right</button>
+                    </div>
+
+                    <div class="font-size-controls">
                         <button class="font-size-btn" onclick="onIncreaseFont()">A+</button>
                         <button class="font-size-btn" onclick="onDecreaseFont()">A-</button>
                     </div>

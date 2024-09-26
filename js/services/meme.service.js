@@ -66,6 +66,8 @@ function createMeme(imgId) {
                 fillColor: '#ffffff',
                 strokeColor: '#000000',
                 rowIdx: 0,
+                font: 'Impact',
+                align: 'center',
             },
         ],
     }
@@ -86,6 +88,8 @@ function addLine() {
         fillColor: '#ffffff',
         strokeColor: '#000000',
         rowIdx: 4,
+        font: 'Impact',
+        align: 'center',
     }
     gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = 4
@@ -108,4 +112,12 @@ function updateLinePos(line, x, y, size) {
 
 function updateSelectedLine(clickedLineIdx) {
     gMeme.selectedLineIdx = clickedLineIdx
+}
+
+function setFontFamily(fontFamily) {
+    gMeme.lines[gMeme.selectedLineIdx].font = fontFamily
+}
+
+function setTextAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align
 }
