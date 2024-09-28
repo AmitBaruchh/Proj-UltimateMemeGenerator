@@ -20,10 +20,12 @@ function onSelectImg(imgId) {
 
 function showMemeEditor() {
     document.querySelector('.image-gallery').classList.add('hide')
+    document.querySelector('.saved-memes').classList.add('hide')
     document.querySelector('.meme-editor').classList.remove('hide')
 }
 
 function onShowGallery() {
     document.querySelector('.image-gallery').classList.remove('hide')
+    document.querySelector('.saved-memes').classList.add('hide')
     document.querySelector('.meme-editor').classList.add('hide')
 }

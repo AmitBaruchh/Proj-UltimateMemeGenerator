@@ -24,6 +24,8 @@ var gImgs = [
     { id: 17, url: 'img/18.jpg', keywords: ['buzz lightyear', 'woody', 'toy story', 'movie'] },
 ]
 
+const MEMES_KEY = 'memes'
+
 function getMeme() {
     return gMeme
 }
@@ -146,4 +148,21 @@ function updateRowIdx(diff) {
     if (line.rowIdx + diff >= 0 && line.rowIdx + diff < maxRows) {
         line.rowIdx += diff
     }
+}
+
+function _saveMemes(imgContent) {
+    gMeme.img = imgContent
+    let savedMemes = _loadSavedMemes()
+
+    savedMemes.push(gMeme)
+    saveToStorage(MEMES_KEY, savedMemes)
+}
+
+function _loadSavedMemes() {
+    return loadFromStorage(MEMES_KEY) || []
+}
+
+function updateGMeme(meme) {
+    gMeme = meme
+    gMeme.selectedLineIdx = meme.selectedLineIdx !== undefined ? meme.selectedLineIdx : 0
 }

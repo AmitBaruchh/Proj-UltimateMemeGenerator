@@ -15,6 +15,8 @@ function onInit() {
     renderGallery()
     document.querySelector('.image-gallery').classList.remove('hide')
     document.querySelector('.meme-editor').classList.add('hide')
+    // clearFromStorage('memes')
+    renderSavedMemes()
 }
 
 function renderMeme() {
@@ -154,7 +156,6 @@ function onDown(ev) {
 }
 
 function downloadMeme(elLink) {
-    console.log(elLink)
     var imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
 }
@@ -238,3 +239,52 @@ function onMoveLineDown() {
     renderMeme()
 }
 
+function onSaveMeme() {
+    removeTextFrame()
+
+    const elImg = new Image()
+    elImg.src = gElCanvas.toDataURL()
+
+    elImg.onload = () => {
+        const imgContent = gElCanvas.toDataURL()
+        _saveMemes(imgContent)
+    }
+}
+
+function removeTextFrame() {
+    updateSelectedLine(-1)
+    renderMeme()
+}
+
+function onSavedMemesGallery() {
+    renderSavedMemes()
+    document.querySelector('.saved-memes').classList.remove('hide')
+    document.querySelector('.image-gallery').classList.add('hide')
+    document.querySelector('.meme-editor').classList.add('hide')
+}
+
+function renderSavedMemes() {
+    const savedMemes = _loadSavedMemes()
+    if (!savedMemes || !savedMemes.length) return
+
+    const strHTMLs = savedMemes.map((meme, idx) => {
+        return `
+        <div class="meme-item" onclick="onEditSavedMeme(${idx})">
+            <img src="${meme.img}" alt="meme image" />
+        </div>`
+    })
+
+    document.querySelector('.saved-memes-container').innerHTML = strHTMLs.join('')
+}
+
+function onEditSavedMeme(memeIdx) {
+    const savedMemes = _loadSavedMemes()
+    const meme = savedMemes[memeIdx]
+
+    updateGMeme(meme)
+
+    document.querySelector('.meme-editor').classList.remove('hide')
+    document.querySelector('.saved-memes').classList.add('hide')
+
+    renderMeme()
+}
