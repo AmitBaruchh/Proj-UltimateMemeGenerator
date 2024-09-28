@@ -28,6 +28,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for main buttons, font size and align buttons*/
+.main-buttons-section,
+.font-size-and-align-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Style for color picker images */
 label img {
     width: 30px;
