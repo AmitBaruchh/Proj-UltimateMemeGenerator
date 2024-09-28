@@ -4,6 +4,8 @@
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
+    padding-left: 2em;
+    padding-right: 2em;
     padding: 20px;
     background-color: var(--clr-secondary-2);
     border-radius: 10px;
@@ -20,8 +22,6 @@
     gap: 10px;
     max-width: 450px;
     margin: 0 auto;
-    align-items: center;
-    justify-items: center;
     padding: 20px;
     background-color: var(--clr-secondary-2);
     border-radius: 10px;

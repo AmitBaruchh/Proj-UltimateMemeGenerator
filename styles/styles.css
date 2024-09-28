@@ -10,6 +10,7 @@
 /* COMPONENTS */
 @import url('./components/main-header.css');
 @import url('./components/main-nav.css');
+@import url('./components/main-screen.css');
 @import url('./components/gallery.css');
 @import url('./components/meme-editor.css');
 @import url('./components/main-footer.css');

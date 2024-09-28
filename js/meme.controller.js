@@ -299,3 +299,7 @@ function onEditSavedMeme(memeIdx) {
 
     renderMeme()
 }
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}

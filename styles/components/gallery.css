@@ -2,3 +2,13 @@
     flex: 1;
     max-width: 100%;
 }
+
+.gallery-container img {
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
+}
+
+.keyword-tags-container {
+    cursor: pointer;
+}

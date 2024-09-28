@@ -8,6 +8,8 @@
         <title>Ultimate Meme Generator</title>
     </head>
     <body class="main-layout" onload="onInit()">
+        <div class="main-screen" onclick="toggleMenu()"></div>
+
         <header class="main-header flex space-between align-center">
             <img src="logo/LOGO.png" alt="MemeGen Logo" />
             <nav class="main-nav">
@@ -23,6 +25,7 @@
                     </li>
                 </ul>
             </nav>
+            <button onclick="toggleMenu()" class="btn-toggle-menu">🍔</button>
         </header>
         <main class="main-content">
             <section class="image-gallery">

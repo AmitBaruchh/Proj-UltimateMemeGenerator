@@ -1,9 +1,14 @@
 .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 0 1rem;
     background-color: var(--clr-primary-base);
     color: var(--clr-secondary-2);
     height: 70px;
     margin-bottom: 1.6875em;
+    width: 100%;
 }
 
 .main-header img {
