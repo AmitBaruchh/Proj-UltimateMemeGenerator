@@ -13,6 +13,7 @@ function onInit() {
     addListeners()
     renderAll()
     onShowGallery()
+
     // clearFromStorage('memes')
 }
 
@@ -92,8 +93,14 @@ function drawImg(meme) {
     const imgObj = setImg(meme.selectedImgId)
 
     elImg.src = imgObj.url
+
     elImg.onload = () => {
         console.log('on load')
+        const imgRatio = elImg.width / elImg.height
+        const canvasHeight = gElCanvas.width / imgRatio
+
+        gElCanvas.height = canvasHeight
+
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => renderLine(line, idx))
     }
@@ -114,6 +121,7 @@ function onClearCanvas() {
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.clientWidth - 40 //Subtracting 20px padding from each side
+    gElCanvas.height = elContainer.clientHeight
     renderMeme()
 }
 
@@ -133,9 +141,9 @@ function onSetText() {
 function addListeners() {
     addMouseListeners()
     // Listen for resize ev
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-    })
+    // window.addEventListener('resize', () => {
+    //     resizeCanvas()
+    // })
     document.querySelector('#fillColor').addEventListener('input', onSetColor)
     document.querySelector('#strokeColor').addEventListener('input', onSetColor)
     document.querySelector('#text').addEventListener('input', onSetText)

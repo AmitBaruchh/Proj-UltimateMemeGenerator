@@ -1,14 +1,30 @@
-.main-nav ul {
-    display: flex;
-    gap: 10px;
+.main-nav .main-nav-list {
+    gap: 0.9375em;
+    display: grid;
+    grid-auto-flow: column;
     color: white;
 }
 
-.main-nav a:hover {
-    text-decoration: underline;
-    color: var(--clr-secondary-2);
+.main-nav-list li a {
+    height: 100%;
 }
 
-.hide {
-    display: none;
+.main-nav-list li a:hover {
+    color: var(--clr-secondary);
+    border-bottom: 2px solid var(--clr-secondary);
+}
+
+.main-nav-list li {
+    position: relative;
+    padding-right: 0.9375em;
+}
+
+.main-nav-list li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 110%;
+    width: 1px;
+    background-color: gray;
 }

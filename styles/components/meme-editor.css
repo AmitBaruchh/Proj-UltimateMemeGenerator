@@ -1,0 +1,105 @@
+/* Meme Editor */
+.meme-editor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--clr-secondary-2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hide {
+    display: none;
+}
+
+/* Editor Controls */
+.editor-controls {
+    display: grid;
+    gap: 10px;
+    max-width: 450px;
+    margin: 0 auto;
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+    background-color: var(--clr-secondary-2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for color picker images */
+label img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+input[type='color'] {
+    display: none;
+}
+
+/* Share Button Section */
+.share-button-section {
+    align-items: center;
+    gap: 10px;
+}
+
+.action-button {
+    display: block;
+    width: 7.5em;
+    padding: 10px;
+    background-color: var(--clr-primary-base);
+    color: var(--clr-secondary-2);
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875em;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background-color: #e65b00;
+}
+
+button,
+.color-btn {
+    padding: 5px;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+}
+
+input[type='text'],
+select {
+    padding: 10px;
+    margin-right: 8px;
+    margin-left: 8px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 0.875em;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/* Canvas style */
+canvas {
+    background-color: var(--clr-secondary-2);
+    border: 1px solid var(--clr-secondary);
+}
+
+.canvas-container {
+    max-width: 400px;
+    margin-bottom: 1rem;
+    background-color: var(--clr-secondary-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}

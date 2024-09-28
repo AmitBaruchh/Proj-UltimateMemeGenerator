@@ -58,9 +58,11 @@ function renderKeywordTags() {
     let strHTMLs = ''
 
     for (let keyword in keywords) {
-        const fontSize = 14 + keywords[keyword] * 2
+        const fontSizePX = 10 + keywords[keyword] * 2
+        const fontSizeEM = fontSizePX / 16
+
         strHTMLs += `
-            <span style="font-size: ${fontSize}px;" onclick="onKeywordClick('${keyword}')">${keyword}</span>
+            <span style="font-size: ${fontSizeEM}em;" onclick="onKeywordClick('${keyword}')">${keyword}</span>
         `
     }
 

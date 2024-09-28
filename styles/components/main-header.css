@@ -1,10 +1,9 @@
 .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    padding: 0 1rem;
     background-color: var(--clr-primary-base);
     color: var(--clr-secondary-2);
+    height: 70px;
+    margin-bottom: 1.6875em;
 }
 
 .main-header img {

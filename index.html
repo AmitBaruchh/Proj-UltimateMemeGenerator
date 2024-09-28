@@ -8,10 +8,10 @@
         <title>Ultimate Meme Generator</title>
     </head>
     <body class="main-layout" onload="onInit()">
-        <header class="main-header">
+        <header class="main-header flex space-between align-center">
             <img src="logo/LOGO.png" alt="MemeGen Logo" />
             <nav class="main-nav">
-                <ul>
+                <ul class="flex main-nav-list clean-list">
                     <li>
                         <a href="#" onclick="onShowGallery()">Gallery</a>
                     </li>
@@ -28,7 +28,7 @@
             <section class="image-gallery">
                 <h2>Image Gallery</h2>
                 <div class="search-container">
-                    <label for="img-filter">Enter search keyword:</label>
+                    <label for="img-filter"></label>
                     <input
                         type="text"
                         id="img-filter"
@@ -51,65 +51,89 @@
 
             <section class="meme-editor hide">
                 <div class="canvas-container">
-                    <canvas width="450" height="450"></canvas>
+                    <canvas width="400" height="400"></canvas>
                 </div>
 
                 <div class="editor-controls">
-                    <button class="clear-btn" onclick="onClearCanvas()">Clear</button>
+                    <!-- <button class="clear-btn" onclick="onClearCanvas()">Clear</button> -->
 
-                    <label for="text">Text:</label>
-                    <input required type="text" id="text" name="text" placeholder="Text" onclick="clearInput(this)" />
+                    <div class="text-section">
+                        <input
+                            required
+                            type="text"
+                            id="text"
+                            name="text"
+                            placeholder="Text"
+                            onclick="clearInput(this)"
+                        />
+                    </div>
 
-                    <p>Choose fill color:</p>
-                    <input type="color" id="fillColor" name="fillColor" value="#ffffff" />
-
-                    <p>Choose stroke color:</p>
-                    <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
-
-                    <label for="font-family">Font Family:</label>
-                    <select class="font-family" onchange="onSetFontFamily(this.value)">
-                        <option value="" disabled selected>Choose Font</option>
-                        <option value="Impact">Impact</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Tahoma ">Comic Sans MS</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                    </select>
-
-                    <div class="text-align-controls">
-                        <button onclick="onSetTextAlign('left')">
-                            <img src="icons\align-to-left.png" alt="Align Left" />
+                    <div class="main-buttons-section">
+                        <button class="switch-line-btn" onclick="onSwitchLine()">
+                            <img src="icons\switch-line.png" alt="Switch Line" />
                         </button>
-                        <button onclick="onSetTextAlign('center')">
-                            <img src="icons\center-text-alignment.png" alt="Align Center" />
+                        <button onclick="onMoveLineUp()">
+                            <img src="icons\arrow-up.png" alt="Move Line Up" />
                         </button>
-                        <button onclick="onSetTextAlign('right')">
-                            <img src="icons\align-to-right.png" alt="Align Right" />
+                        <button onclick="onMoveLineDown()">
+                            <img src="icons\arrow-down.png" alt="Move Line Down" />
+                        </button>
+
+                        <button class="add-line-btn" onclick="onAddLine()">
+                            <img src="icons\add.png" alt="Add Line" />
+                        </button>
+                        <button class="delete-line-btn" onclick="onDeleteLine()">
+                            <img src="icons\trash.png" alt="Delete Line" />
                         </button>
                     </div>
 
-                    <div class="font-size-controls">
-                        <button class="font-size-btn" onclick="onIncreaseFont()">
-                            <img src="icons\increase font - icon.png" alt="Increase Font Size" />
-                        </button>
-                        <button class="font-size-btn" onclick="onDecreaseFont()">
-                            <img src="icons\decrease font - icon.png" alt="Decrease Font Size" />
-                        </button>
+                    <div class="font-size-and-align-section flex">
+                        <div class="text-align-controls">
+                            <button onclick="onSetTextAlign('left')">
+                                <img src="icons\align-to-left.png" alt="Align Left" />
+                            </button>
+                            <button onclick="onSetTextAlign('center')">
+                                <img src="icons\center-text-alignment.png" alt="Align Center" />
+                            </button>
+                            <button onclick="onSetTextAlign('right')">
+                                <img src="icons\align-to-right.png" alt="Align Right" />
+                            </button>
+                        </div>
+
+                        <div class="font-size-controls">
+                            <button class="font-size-btn" onclick="onIncreaseFont()">
+                                <img src="icons\increase font - icon.png" alt="Increase Font Size" />
+                            </button>
+                            <button class="font-size-btn" onclick="onDecreaseFont()">
+                                <img src="icons\decrease font - icon.png" alt="Decrease Font Size" />
+                            </button>
+                        </div>
                     </div>
 
-                    <button class="add-line-btn" onclick="onAddLine()">
-                        <img src="icons\add.png" alt="Add Line" />
-                    </button>
-                    <button class="delete-line-btn" onclick="onDeleteLine()">
-                        <img src="icons\trash.png" alt="Delete Line" />
-                    </button>
-                    <button class="switch-line-btn" onclick="onSwitchLine()">🔃</button>
-                    <button onclick="onMoveLineUp()">⬆️</button>
-                    <button onclick="onMoveLineDown()">⬇️</button>
+                    <div class="font-and-color-section flex">
+                        <select class="font-family" onchange="onSetFontFamily(this.value)">
+                            <option value="" disabled selected>Choose Font</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Tahoma ">Comic Sans MS</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                        </select>
 
-                    <a class="download-link" href="#" onclick="downloadMeme(this)" download="my-meme.jpg">
-                        Download as jpeg
-                    </a>
-                    <button onclick="onSaveMeme()">Save</button>
+                        <label for="fillColor">
+                            <img class="color-btn" src="icons\paint-board-and-brush.png" alt="Choose Fill Color" />
+                        </label>
+                        <input type="color" id="fillColor" name="fillColor" value="#ffffff" />
+                        <label for="strokeColor">
+                            <img class="color-btn" src="icons\text stroke.png" alt="Choose Stroke Color" />
+                        </label>
+                        <input type="color" id="strokeColor" name="strokeColor" value="#000000" />
+                    </div>
+                    <div class="share-button-section flex">
+                        <button class="action-button" onclick="onSaveMeme()">Save</button>
+                        <button class="action-button" href="#" onclick="downloadMeme(this)" download="my-meme.jpg">
+                            Download
+                        </button>
+                    </div>
                 </div>
             </section>
         </main>
@@ -117,8 +141,6 @@
             <p>Ultimate Meme Generator</p>
         </footer>
         <script src="js\services\storage.service.js"></script>
-        <!-- <script src="js\services\util.service.js"></script> -->
-        <!-- <script src="js\services\gallery.service.js"></script> -->
         <script src="js\services\meme.service.js"></script>
         <script src="js\meme.controller.js"></script>
         <script src="js\gallery.controller.js"></script>
