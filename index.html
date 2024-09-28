@@ -27,6 +27,20 @@
         <main class="main-content">
             <section class="image-gallery">
                 <h2>Image Gallery</h2>
+                <div class="search-container">
+                    <label for="img-filter">Enter search keyword:</label>
+                    <input
+                        type="text"
+                        id="img-filter"
+                        name="img-filter"
+                        placeholder="Enter search keyword"
+                        oninput="onFilterImages()"
+                    />
+                    <button onclick="onUpdateKeyWord()">🔍</button>
+
+                    <div class="keyword-tags-container"></div>
+                </div>
+
                 <div class="gallery-container"></div>
             </section>
 

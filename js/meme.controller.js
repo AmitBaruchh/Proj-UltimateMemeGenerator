@@ -11,11 +11,14 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     resizeCanvas()
     addListeners()
-    renderMeme()
-    renderGallery()
-    document.querySelector('.image-gallery').classList.remove('hide')
-    document.querySelector('.meme-editor').classList.add('hide')
+    renderAll()
+    onShowGallery()
     // clearFromStorage('memes')
+}
+
+function renderAll() {
+    renderGallerySection()
+    renderMeme()
     renderSavedMemes()
 }
 

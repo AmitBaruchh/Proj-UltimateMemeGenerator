@@ -4,27 +4,29 @@
 
 var gMeme
 var gImgs = [
-    { id: 0, url: 'img/1.jpg', keywords: ['trump', 'speech', 'president'] },
-    { id: 1, url: 'img/2.jpg', keywords: ['dogs', 'puppies', 'love'] },
-    { id: 2, url: 'img/3.jpg', keywords: ['babies', 'dog', 'cute'] },
-    { id: 3, url: 'img/4.jpg', keywords: ['cat', 'sleep', 'computer'] },
-    { id: 4, url: 'img/5.jpg', keywords: ['baby', 'fist', 'success'] },
-    { id: 5, url: 'img/6.jpg', keywords: ['aliens', 'theory', 'conspiracy', 'movie'] },
-    { id: 6, url: 'img/7.jpg', keywords: ['baby', 'shock', 'surprise'] },
+    { id: 0, url: 'img/1.jpg', keywords: ['trump', 'speech', 'president', 'politics'] },
+    { id: 1, url: 'img/2.jpg', keywords: ['dogs', 'puppies', 'love', 'friendship', 'animals'] },
+    { id: 2, url: 'img/3.jpg', keywords: ['babies', 'baby', 'dog', 'cute', 'puppy', 'sleep', 'animal'] },
+    { id: 3, url: 'img/4.jpg', keywords: ['cat', 'sleep', 'computer', 'pet', 'animal'] },
+    { id: 4, url: 'img/5.jpg', keywords: ['baby', 'fist', 'success', 'funny', 'determination'] },
+    { id: 5, url: 'img/6.jpg', keywords: ['aliens', 'theory', 'conspiracy', 'movie', 'hair'] },
+    { id: 6, url: 'img/7.jpg', keywords: ['baby', 'shock', 'surprise', 'amazed'] },
     { id: 7, url: 'img/8.jpg', keywords: ['willy wonka', 'sarcastic', 'chocolate', 'movie'] },
-    { id: 8, url: 'img/9.jpg', keywords: ['baby', 'scheming', 'happy'] },
-    { id: 9, url: 'img/10.jpg', keywords: ['obama', 'laughing', 'president'] },
-    { id: 10, url: 'img/11.jpg', keywords: ['boxing', 'sports', 'fight', 'kiss'] },
-    { id: 11, url: 'img/12.jpg', keywords: ['pointing', 'man', 'serious', 'what would you do'] },
-    { id: 12, url: 'img/13.jpg', keywords: ['leonardo dicaprio', 'cheers', 'gatsby', 'movie'] },
-    { id: 13, url: 'img/14.jpg', keywords: ['morpheus', 'matrix', 'movie'] },
+    { id: 8, url: 'img/9.jpg', keywords: ['baby', 'scheming', 'happy', 'plotting'] },
+    { id: 9, url: 'img/10.jpg', keywords: ['obama', 'laughing', 'president', 'politics', 'joy'] },
+    { id: 10, url: 'img/11.jpg', keywords: ['boxing', 'sports', 'fight', 'kiss', 'funny'] },
+    { id: 11, url: 'img/12.jpg', keywords: ['pointing', 'man', 'serious', 'what would you do', 'tv show'] },
+    { id: 12, url: 'img/13.jpg', keywords: ['leonardo dicaprio', 'cheers', 'gatsby', 'movie', 'celebration'] },
+    { id: 13, url: 'img/14.jpg', keywords: ['morpheus', 'matrix', 'movie', 'sunglasses'] },
     { id: 14, url: 'img/15.jpg', keywords: ['sean bean', 'boromir', 'one does not simply', 'movie'] },
     { id: 15, url: 'img/16.jpg', keywords: ['picard', 'facepalm', 'star trek', 'movie'] },
-    { id: 16, url: 'img/17.jpg', keywords: ['putin', 'russia', 'president', 'laughing'] },
+    { id: 16, url: 'img/17.jpg', keywords: ['putin', 'russia', 'president', 'laughing', 'politics'] },
     { id: 17, url: 'img/18.jpg', keywords: ['buzz lightyear', 'woody', 'toy story', 'movie'] },
 ]
+var gKeywordSearchCountMap = { funny: 12, movie: 16, baby: 2 }
 
 const MEMES_KEY = 'memes'
+const KEYWORDS_KEY = 'key-words'
 
 function getMeme() {
     return gMeme
@@ -165,4 +167,25 @@ function _loadSavedMemes() {
 function updateGMeme(meme) {
     gMeme = meme
     gMeme.selectedLineIdx = meme.selectedLineIdx !== undefined ? meme.selectedLineIdx : 0
+}
+
+function updateKeywordSearchCount(keyword) {
+    if (!gKeywordSearchCountMap[keyword]) {
+        gKeywordSearchCountMap[keyword] = 1
+    } else {
+        gKeywordSearchCountMap[keyword]++
+    }
+    _saveKeyWords()
+}
+
+function updateGKeywordSearchCountMap() {
+    gKeywordSearchCountMap = loadFromStorage(KEYWORDS_KEY)
+}
+
+function getKeywordSearchCountMap() {
+    return gKeywordSearchCountMap
+}
+
+function _saveKeyWords() {
+    saveToStorage(KEYWORDS_KEY, gKeywordSearchCountMap)
 }
