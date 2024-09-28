@@ -2,6 +2,7 @@
 
 //^ Meme Service
 
+//* Variables
 var gMeme
 var gImgs = [
     { id: 0, url: 'img/1.jpg', keywords: ['trump', 'speech', 'president', 'politics'] },
@@ -28,10 +29,14 @@ var gKeywordSearchCountMap = { funny: 12, movie: 16, baby: 2 }
 const MEMES_KEY = 'memes'
 const KEYWORDS_KEY = 'key-words'
 
+//* Functions for setting and getting the meme state
+
+// Get the current meme object
 function getMeme() {
     return gMeme
 }
 
+// Set the fill and stroke colors of the current line
 function setColors(fillColor, strokeColor) {
     if (!gMeme) return
     setFillColor(fillColor)
@@ -46,19 +51,13 @@ function setStrokeColor(strokeColor) {
     gMeme.lines[gMeme.selectedLineIdx].strokeColor = strokeColor
 }
 
+// Set the text of the selected line
 function setLineTxt(txt) {
     if (!gMeme) return
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
-function getImgs() {
-    return gImgs
-}
-
-function setImg(memeId) {
-    return getImgs().find(img => img.id === memeId)
-}
-
+// Create a new meme object with a selected image ID
 function createMeme(imgId) {
     gMeme = {
         selectedImgId: imgId,
@@ -77,11 +76,27 @@ function createMeme(imgId) {
     }
 }
 
+//* Functions for handling image data
+
+// Get the list of all available images
+function getImgs() {
+    return gImgs
+}
+
+// Set the image by ID for the meme
+function setImg(memeId) {
+    return getImgs().find(img => img.id === memeId)
+}
+
+//* Functions for manipulating text and lines
+
+// Update the font size of the selected line
 function updateFontSize(diff) {
     if (!gMeme) return
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
 
+// Add a new line to the meme
 function addLine() {
     var numOfLines = gMeme.lines.length
     var rowIdx
@@ -109,11 +124,13 @@ function addLine() {
     return newLine
 }
 
+// Switch to the next line
 function switchLine() {
     if (!gMeme || gMeme.lines.length === 0) return
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
 }
 
+// Update the position of the current line
 function updateLinePos(line, x, y, size) {
     const textWidth = line.txt.length * size * 0.5
     line.pos = {
@@ -124,18 +141,22 @@ function updateLinePos(line, x, y, size) {
     }
 }
 
+// Update the selected line by its index
 function updateSelectedLine(clickedLineIdx) {
     gMeme.selectedLineIdx = clickedLineIdx
 }
 
+// Set the font family for the selected line
 function setFontFamily(fontFamily) {
     gMeme.lines[gMeme.selectedLineIdx].font = fontFamily
 }
 
+// Set the text alignment for the selected line
 function setTextAlign(align) {
     gMeme.lines[gMeme.selectedLineIdx].align = align
 }
 
+// Delete the currently selected line
 function deleteLine() {
     if (!gMeme.lines.length) return
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
@@ -144,6 +165,7 @@ function deleteLine() {
     }
 }
 
+// Update the row index (vertical position) of the selected line
 function updateRowIdx(diff) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
     const maxRows = 5
@@ -152,23 +174,8 @@ function updateRowIdx(diff) {
     }
 }
 
-function _saveMemes(imgContent) {
-    gMeme.img = imgContent
-    let savedMemes = _loadSavedMemes()
-
-    savedMemes.push(gMeme)
-    saveToStorage(MEMES_KEY, savedMemes)
-}
-
-function _loadSavedMemes() {
-    return loadFromStorage(MEMES_KEY) || []
-}
-
-function updateGMeme(meme) {
-    gMeme = meme
-    gMeme.selectedLineIdx = meme.selectedLineIdx !== undefined ? meme.selectedLineIdx : 0
-}
-
+//*Functions for handling keyword search count
+// Update the search count for a keyword
 function updateKeywordSearchCount(keyword) {
     if (!gKeywordSearchCountMap[keyword]) {
         gKeywordSearchCountMap[keyword] = 1
@@ -178,14 +185,38 @@ function updateKeywordSearchCount(keyword) {
     _saveKeyWords()
 }
 
+// Load keyword search count map from local storage
 function updateGKeywordSearchCountMap() {
     gKeywordSearchCountMap = loadFromStorage(KEYWORDS_KEY)
 }
 
+// Get the keyword search count map
 function getKeywordSearchCountMap() {
     return gKeywordSearchCountMap
 }
 
+// Save the keyword search count map to local storage
 function _saveKeyWords() {
     saveToStorage(KEYWORDS_KEY, gKeywordSearchCountMap)
+}
+
+//*Functions for saving and loading memes
+// Save the current meme to local storage
+function _saveMemes(imgContent) {
+    gMeme.img = imgContent
+    let savedMemes = _loadSavedMemes()
+
+    savedMemes.push(gMeme)
+    saveToStorage(MEMES_KEY, savedMemes)
+}
+
+// Load saved memes from local storage
+function _loadSavedMemes() {
+    return loadFromStorage(MEMES_KEY) || []
+}
+
+// Update the global meme object with a saved meme
+function updateGMeme(meme) {
+    gMeme = meme
+    gMeme.selectedLineIdx = meme.selectedLineIdx !== undefined ? meme.selectedLineIdx : 0
 }

@@ -2,9 +2,12 @@
 
 //^ Meme Controller
 
+//* Variables
 var gElCanvas
 var gCtx
 
+//* Initialization
+// Initializes the canvas, listeners, and renders the initial state (gallery and memes)
 function onInit() {
     console.log('start')
     gElCanvas = document.querySelector('canvas')
@@ -17,17 +20,46 @@ function onInit() {
     // clearFromStorage('memes')
 }
 
+//* Render functions
+// Renders all necessary components like the gallery, meme, and saved memes
 function renderAll() {
     renderGallerySection()
     renderMeme()
     renderSavedMemes()
 }
 
+// Renders the selected meme on the canvas
 function renderMeme() {
     const meme = getMeme()
     drawImg(meme)
 }
 
+// Renders saved memes from local storage
+function renderSavedMemes() {
+    const savedMemes = _loadSavedMemes()
+    if (!savedMemes || !savedMemes.length) return
+
+    const strHTMLs = savedMemes.map((meme, idx) => {
+        return `
+        <div class="meme-item" onclick="onEditSavedMeme(${idx})">
+            <img src="${meme.img}" alt="meme image" />
+        </div>`
+    })
+
+    document.querySelector('.saved-memes-container').innerHTML = strHTMLs.join('')
+}
+
+// Renders a specific line of text on the canvas
+function renderLine(line, idx) {
+    const colIdx = clacCol(line.rowIdx)
+    const x = gElCanvas.width / 2
+    const y = colIdx
+    updateLinePos(line, x, y, line.size)
+    drawText(idx)
+}
+
+//* Drawing functions
+// Calculates the Y position for the text based on row index
 function clacCol(rowIdx) {
     const totalRows = 5
     const rowHeight = gElCanvas.height / totalRows
@@ -35,6 +67,7 @@ function clacCol(rowIdx) {
     return rowHeight * rowIdx + rowHeight / 2
 }
 
+// Draws the text for the selected line on the canvas
 function drawText(idx) {
     const meme = getMeme()
     const line = meme.lines[idx]
@@ -68,6 +101,7 @@ function drawText(idx) {
     if (idx === meme.selectedLineIdx) drawTextFrame(line)
 }
 
+// Draws a border around the selected text line
 function drawTextFrame(line) {
     const { x, y, width, height } = line.pos
     gCtx.strokeStyle = '#ff6f00'
@@ -86,6 +120,7 @@ function drawTextFrame(line) {
     }
 }
 
+// Loads the image onto the canvas and draws it
 function drawImg(meme) {
     if (!meme) return
     const elImg = new Image()
@@ -106,34 +141,16 @@ function drawImg(meme) {
     }
 }
 
-function renderLine(line, idx) {
-    const colIdx = clacCol(line.rowIdx)
-    const x = gElCanvas.width / 2
-    const y = colIdx
-    updateLinePos(line, x, y, line.size)
-    drawText(idx)
-}
-
+// Clears the entire canvas
 function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
+// Resizes the canvas to fit the container's dimensions
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.clientWidth - 40 //Subtracting 20px padding from each side
     gElCanvas.height = elContainer.clientHeight
-    renderMeme()
-}
-
-function onSetColor() {
-    const fillColor = document.querySelector('#fillColor').value
-    const strokeColor = document.querySelector('#strokeColor').value
-    setColors(fillColor, strokeColor)
-    renderMeme()
-}
-
-function onSetText() {
-    setLineTxt(document.querySelector('#text').value)
     renderMeme()
 }
 
@@ -149,10 +166,13 @@ function addListeners() {
     document.querySelector('#text').addEventListener('input', onSetText)
 }
 
+// Adds mouse listeners for interaction with the canvas
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
 }
 
+//* Event handlers
+// Handles the mousedown event for selecting text on the canvas
 function onDown(ev) {
     const pos = getEvPos(ev)
     const meme = getMeme()
@@ -166,21 +186,54 @@ function onDown(ev) {
     document.body.style.cursor = 'pointer'
 }
 
+// Gets the position of the mouse click relative to the canvas
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    return pos
+}
+
+// Clears the input field when focused
+function clearInput(el) {
+    el.value = ''
+}
+
+// Downloads the meme as an image
 function downloadMeme(elLink) {
     var imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
 }
 
+//* Text setting
+// Updates the colors of the fill and stroke for the selected text line
+function onSetColor() {
+    const fillColor = document.querySelector('#fillColor').value
+    const strokeColor = document.querySelector('#strokeColor').value
+    setColors(fillColor, strokeColor)
+    renderMeme()
+}
+
+// Sets the text for the selected line
+function onSetText() {
+    setLineTxt(document.querySelector('#text').value)
+    renderMeme()
+}
+
+// Increases the font size of the selected text line
 function onIncreaseFont() {
     updateFontSize(2)
     renderMeme()
 }
 
+// Decreases the font size of the selected text line
 function onDecreaseFont() {
     updateFontSize(-2)
     renderMeme()
 }
 
+// Adds a new line to the meme
 function onAddLine() {
     const line = addLine()
     updateLinePos(line, gElCanvas.width / 2, clacCol(line.rowIdx), line.size)
@@ -189,6 +242,7 @@ function onAddLine() {
     renderMeme()
 }
 
+// Switches between lines in the meme
 function onSwitchLine() {
     switchLine()
     updateInputs()
@@ -199,11 +253,9 @@ function updateInputs() {
     const meme = getMeme()
     const currLine = meme.lines[meme.selectedLineIdx]
     document.querySelector('#text').value = currLine.txt
-
-    document.querySelector('#fillColor').value = currLine.fillColor
-    document.querySelector('#strokeColor').value = currLine.strokeColor
 }
 
+// Checks if the clicked position is within the bounds of a text line
 function isTextClick(clickX, clickY, line) {
     return (
         clickX >= line.pos.x &&
@@ -213,43 +265,37 @@ function isTextClick(clickX, clickY, line) {
     )
 }
 
-function getEvPos(ev) {
-    var pos = {
-        x: ev.offsetX,
-        y: ev.offsetY,
-    }
-    return pos
-}
-
+// Sets the font family for the selected line
 function onSetFontFamily(fontFamily) {
     setFontFamily(fontFamily)
     renderMeme()
 }
 
+// Sets the text alignment for the selected line
 function onSetTextAlign(align) {
     setTextAlign(align)
     renderMeme()
 }
 
+// Deletes the selected line from the meme
 function onDeleteLine() {
     deleteLine()
     renderMeme()
 }
 
-function clearInput(el) {
-    el.value = ''
-}
-
+// Moves the selected line up in the canvas
 function onMoveLineUp() {
     updateRowIdx(-1)
     renderMeme()
 }
 
+// Moves the selected line down in the canvas
 function onMoveLineDown() {
     updateRowIdx(1)
     renderMeme()
 }
 
+// Saves the current meme and removes the text frame
 function onSaveMeme() {
     removeTextFrame()
 
@@ -262,44 +308,25 @@ function onSaveMeme() {
     }
 }
 
+// Removes the text frame from the selected line before saving the meme
 function removeTextFrame() {
     updateSelectedLine(-1)
     renderMeme()
 }
 
-function onSavedMemesGallery() {
-    renderSavedMemes()
-    document.querySelector('.saved-memes').classList.remove('hide')
-    document.querySelector('.image-gallery').classList.add('hide')
-    document.querySelector('.meme-editor').classList.add('hide')
-}
-
-function renderSavedMemes() {
-    const savedMemes = _loadSavedMemes()
-    if (!savedMemes || !savedMemes.length) return
-
-    const strHTMLs = savedMemes.map((meme, idx) => {
-        return `
-        <div class="meme-item" onclick="onEditSavedMeme(${idx})">
-            <img src="${meme.img}" alt="meme image" />
-        </div>`
-    })
-
-    document.querySelector('.saved-memes-container').innerHTML = strHTMLs.join('')
-}
-
+// Loads the saved meme and switches to the editor for editing
 function onEditSavedMeme(memeIdx) {
     const savedMemes = _loadSavedMemes()
     const meme = savedMemes[memeIdx]
 
     updateGMeme(meme)
 
-    document.querySelector('.meme-editor').classList.remove('hide')
-    document.querySelector('.saved-memes').classList.add('hide')
+    showMemeEditor()
 
     renderMeme()
 }
 
+// Toggles the menu visibility (for mobile or small screens)
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
 }

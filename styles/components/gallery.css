@@ -3,12 +3,11 @@
     max-width: 100%;
 }
 
-.gallery-container img {
-    object-fit: cover;
-    height: 150px;
-    width: 150px;
+.keyword-tags-container {
+    cursor: pointer;
 }
 
-.keyword-tags-container {
+.image-gallery img,
+.saved-memes img {
     cursor: pointer;
 }
