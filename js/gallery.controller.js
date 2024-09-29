@@ -98,7 +98,7 @@ function onSavedMemesGallery() {
     document.querySelector('.meme-editor').classList.add('hide')
 }
 
-//Upload image
+//Upload image to gallery
 function onImgInput(ev) {
     loadImageFromInput(ev, addImgToGallery)
 }
@@ -121,4 +121,30 @@ function loadImageFromInput(ev, onImageReady) {
 function addImgToGallery(img) {
     addImg(img.src)
     renderGalleryImgs()
+}
+
+//Share on facebook
+function onUploadToFB(url) {
+    // console.log('url:', url)
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+}
+
+function onUploadImg(ev) {
+    ev.preventDefault()
+    const canvasData = gElCanvas.toDataURL('image/jpeg')
+
+    // After a successful upload, allow the user to share on Facebook
+    function onSuccess(uploadedImgUrl) {
+        // console.log('uploadedImgUrl:', uploadedImgUrl)
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        document.querySelector('.share-container').innerHTML = `
+            <a href="${uploadedImgUrl}">Image Url</a>
+                   
+            <button class="btn-facebook action-button " target="_blank" onclick="onUploadToFB('${encodedUploadedImgUrl}')">
+                Share on Facebook  
+            </button>
+        `
+    }
+
+    uploadImg(canvasData, onSuccess)
 }
