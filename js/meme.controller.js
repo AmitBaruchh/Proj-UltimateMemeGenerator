@@ -31,6 +31,7 @@ function renderAll() {
 // Renders the selected meme on the canvas
 function renderMeme() {
     const meme = getMeme()
+
     drawImg(meme)
 }
 

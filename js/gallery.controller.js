@@ -97,3 +97,28 @@ function onSavedMemesGallery() {
     document.querySelector('.image-gallery').classList.add('hide')
     document.querySelector('.meme-editor').classList.add('hide')
 }
+
+//Upload image
+function onImgInput(ev) {
+    loadImageFromInput(ev, addImgToGallery)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+
+    reader.onload = event => {
+        const img = new Image()
+        img.src = event.target.result
+
+        img.onload = () => {
+            onImageReady(img)
+        }
+    }
+
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function addImgToGallery(img) {
+    addImg(img.src)
+    renderGalleryImgs()
+}

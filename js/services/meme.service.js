@@ -28,6 +28,7 @@ var gKeywordSearchCountMap = { funny: 12, movie: 16, baby: 2 }
 
 const MEMES_KEY = 'memes'
 const KEYWORDS_KEY = 'key-words'
+const IMGS_KEY = 'imgs'
 
 //* Functions for setting and getting the meme state
 
@@ -80,6 +81,7 @@ function createMeme(imgId) {
 
 // Get the list of all available images
 function getImgs() {
+    gImgs = loadFromStorage(IMGS_KEY) || gImgs
     return gImgs
 }
 
@@ -219,4 +221,18 @@ function _loadSavedMemes() {
 function updateGMeme(meme) {
     gMeme = meme
     gMeme.selectedLineIdx = meme.selectedLineIdx !== undefined ? meme.selectedLineIdx : 0
+}
+
+//Add upload image
+function addImg(img) {
+    gImgs.unshift({ id: gImgs.length, url: img })
+    _saveimgs()
+}
+
+function _saveimgs() {
+    saveToStorage(IMGS_KEY, gImgs)
+}
+
+function _loadImgs() {
+    return loadFromStorage(IMGS_KEY)
 }

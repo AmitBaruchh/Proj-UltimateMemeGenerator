@@ -85,8 +85,8 @@ button,
     width: 30px;
 }
 
-/* input[type='text'],
-select {
+.meme-editor input[type='text'],
+.meme-editor select {
     padding: 10px;
     margin-right: 8px;
     margin-left: 8px;
@@ -95,7 +95,7 @@ select {
     font-size: 0.875em;
     text-align: center;
     background-color: #f9f9f9;
-} */
+}
 
 /* Canvas style */
 canvas {
