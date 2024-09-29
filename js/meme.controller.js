@@ -147,7 +147,7 @@ function onClearCanvas() {
 }
 
 // Resizes the canvas to fit the container's dimensions
-function resizeCanvas() {
+function resizeCanvas(width, height) {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.clientWidth - 40 //Subtracting 20px padding from each side
     gElCanvas.height = elContainer.clientHeight

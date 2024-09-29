@@ -66,7 +66,7 @@ function onKeywordClick(keyword) {
 }
 
 // Updates the keyword search count when a new keyword is added and re-renders the tags
-function onUpdateKeyWord() {
+function onUpdateKeyword() {
     const filterValue = document.querySelector('#img-filter').value.toLowerCase()
 
     if (filterValue) {

@@ -16,6 +16,10 @@
 /* Mobile Only */
 
 @media (max-width: 640px) {
+    .main-nav-list a {
+        width: 100%;
+        text-align: center;
+    }
     .main-nav .main-nav-list {
         display: flex;
         position: fixed;

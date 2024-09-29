@@ -10,7 +10,7 @@
     <body class="main-layout" onload="onInit()">
         <div class="main-screen" onclick="toggleMenu()"></div>
 
-        <header class="main-header flex space-between align-center">
+        <header class="main-header main-layout full flex space-between align-center">
             <img src="logo/LOGO.png" alt="MemeGen Logo" />
             <nav class="main-nav">
                 <ul class="flex main-nav-list clean-list">
@@ -46,10 +46,12 @@
                         placeholder="Enter search keyword"
                         oninput="onFilterImages()"
                     />
-                    <button onclick="onUpdateKeyWord()">🔍</button>
-
-                    <div class="keyword-tags-container"></div>
+                    <button class="search-btn" onclick="onUpdateKeyword()">
+                        <img src="icons\search-icon.png" alt="Search Keyword" />
+                    </button>
                 </div>
+
+                <div class="keyword-tags-container"></div>
 
                 <div class="gallery-container"></div>
             </section>
@@ -147,7 +149,7 @@
                 </div>
             </section>
         </main>
-        <footer class="main-footer">
+        <footer class="main-footer main-layout full">
             <p>Ultimate Meme Generator</p>
         </footer>
         <script src="js\services\storage.service.js"></script>

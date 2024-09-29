@@ -7,8 +7,8 @@
     background-color: var(--clr-primary-base);
     color: var(--clr-secondary-2);
     height: 70px;
-    margin-bottom: 1.6875em;
     width: 100%;
+    z-index: 1;
 }
 
 .main-header img {

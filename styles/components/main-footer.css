@@ -1,6 +1,9 @@
 .main-footer {
+    position: fixed;
+    bottom: 0;
     background-color: var(--clr-primary-base);
     color: white;
     padding: 10px;
     text-align: center;
+    height: 70px;
 }

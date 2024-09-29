@@ -5,9 +5,53 @@
 
 .keyword-tags-container {
     cursor: pointer;
+    margin-bottom: 1em;
 }
 
 .image-gallery img,
 .saved-memes img {
     cursor: pointer;
+}
+
+.gallery-container,
+.saved-memes-container {
+    background-color: var(--clr-secondary-2);
+    margin-bottom: 6em;
+    border-radius: 0.5em;
+}
+
+.saved-memes {
+    margin-top: 6em;
+}
+
+.search-container {
+    max-width: 15em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    background-color: white;
+    margin-top: 3.5em;
+    border-bottom: 2px solid black;
+}
+
+.search-container input[type='text'] {
+    font-size: 1.125em;
+    padding: 0.625em;
+    width: 15.625em;
+    border: none;
+    margin-right: 0.125em;
+    background-color: white;
+}
+
+.search-container button {
+    width: 2.5em;
+    height: 2.5em;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -3.125em;
 }

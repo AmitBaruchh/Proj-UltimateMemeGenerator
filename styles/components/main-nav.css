@@ -5,13 +5,23 @@
     color: white;
 }
 
-.main-nav-list li a {
+.main-nav-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
 }
 
-.main-nav-list li a:hover {
+.main-nav-list a {
+    height: 70px;
+    position: relative;
+    display: inline-block;
+    padding-top: 1.2em;
+}
+
+.main-nav-list a:hover {
     color: var(--clr-secondary);
-    border-bottom: 2px solid var(--clr-secondary);
+    border-bottom: 4px solid var(--clr-secondary);
 }
 
 .main-nav-list li {
@@ -23,8 +33,9 @@
     content: '';
     position: absolute;
     right: 0;
-    top: 0;
-    height: 110%;
+    top: 15%;
+    height: 80%;
     width: 1px;
     background-color: gray;
+    padding-top: 1.2em;
 }
