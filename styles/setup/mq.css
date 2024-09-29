@@ -1,4 +1,4 @@
-@media (min-width: 640px) {
+@media (min-width: 660px) {
     .gallery-container,
     .saved-memes-container {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -15,7 +15,7 @@
 
 /* Mobile Only */
 
-@media (max-width: 640px) {
+@media (max-width: 660px) {
     .main-nav-list a {
         width: 100%;
         text-align: center;

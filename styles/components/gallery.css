@@ -8,16 +8,26 @@
     margin-bottom: 1em;
 }
 
-.image-gallery img,
-.saved-memes img {
-    cursor: pointer;
-}
-
 .gallery-container,
 .saved-memes-container {
     background-color: var(--clr-secondary-2);
     margin-bottom: 6em;
     border-radius: 0.5em;
+}
+
+.image-gallery > img,
+.saved-memes-container > img {
+    cursor: pointer;
+}
+
+.gallery-container > img,
+.meme-item > img {
+    transition: 300ms;
+}
+
+.gallery-container > img:hover,
+.meme-item > img:hover {
+    scale: 1.1;
 }
 
 .saved-memes {
